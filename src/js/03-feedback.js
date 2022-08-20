@@ -5,10 +5,19 @@ const refs = {
 }
 refs.form.addEventListener('submit', onSubmit);
 refs.textarea.addEventListener('input', onInput);
+
+
 function onSubmit(evt) {
-   console.log()
+evt.preventDefault()
+
+   console.log(evt.target.value)
 }
+
+
+
 function onInput(evt) {
+    
     const message = evt.currentTarget.value;
+    console.log
    localStorage.setItem('feedback', message)
 }
