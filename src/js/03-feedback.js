@@ -1,7 +1,8 @@
 import '../css/common.css';
 import '../css/03-feedback.css';
 
-
+const STORAGE_KEY = 'feedback-form-state';
+formData = {};
 
 const refs = {
     form: document.querySelector('.feedback-form'),
@@ -9,28 +10,21 @@ const refs = {
     email: document.querySelector('.feedback-form input'),
 }
 refs.form.addEventListener('submit', onFormSubmit);
-refs.textarea.addEventListener('input', onFormInput);
-refs.email.addEventListener('input', onFormInput);
+refs.form.addEventListener('input', throttle(onFormInput,500));
 
 
 function onFormSubmit(evt) {
-evt.preventDefault()
-
-   console.log(evt.target.value)
+    evt.preventDefault();
+    evt.currentTarget.reset();
+    localStorage.removeItem(STORAGE_KEY)
 }
 
 
 
 function onFormInput(evt) {
     
-    const message = evt.target.value;
-    const email = evt.target.value
-    console.log(message)
-    console.log(email)
-    localStorage.setItem('feedback-form-state', JSON.stringify({
-        email: email,
-        message: message
-    }))
-    const saveData = localStorage.getItem('feedback-form-state');
-    const parseData=JSON.parse(saveData)
+    formData[evt.target.name] = evt.target.value
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
+   
+   
 }
