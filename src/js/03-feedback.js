@@ -1,3 +1,7 @@
+import '../css/common.css';
+import '../css/styles.css';
+
+
 
 const refs = {
     form: document.querySelector('.feedback-form'),
@@ -19,5 +23,5 @@ function onInput(evt) {
     
     const message = evt.currentTarget.value;
     console.log
-   localStorage.setItem('feedback', message)
+   localStorage.setItem('feedback-form-state', message)
 }
