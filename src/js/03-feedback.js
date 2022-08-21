@@ -1,5 +1,5 @@
-// import '../css/common.css';
-// import '../css/03-feedback.css';
+import '../css/common.css';
+import '../css/03-feedback.css';
 
 const STORAGE_KEY = 'feedback-form-state';
 formData = {};
@@ -17,9 +17,10 @@ populateText();
 function onFormSubmit(evt) {
     evt.preventDefault();
     const storageObj = localStorage.getItem(STORAGE_KEY);
-      console.log(JSON.parse(storageObj))
-    evt.currentTarget.reset();
+    console.log(JSON.parse(storageObj))
     localStorage.removeItem(STORAGE_KEY)
+    evt.currentTarget.reset();
+    
    
 }
 
