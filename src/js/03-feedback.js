@@ -26,11 +26,9 @@ function onFormSubmit(evt) {
 
 
 function onFormInput(evt) {
-    if (formData) {
-         formData[evt.target.name] = evt.target.value
+    
+    formData[evt.target.name] = evt.target.value
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
-    }
-   
    
    
 }
