@@ -1,5 +1,4 @@
-import '../css/common.css';
-import '../css/03-feedback.css';
+
 
 const STORAGE_KEY = 'feedback-form-state';
 formData = {};
