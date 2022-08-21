@@ -2,7 +2,7 @@
 // import '../css/03-feedback.css';
 
 const STORAGE_KEY = 'feedback-form-state';
-formData = [];
+formData = {};
 const throttle = require('lodash.throttle');
 const refs = {
     form: document.querySelector('.feedback-form'),
@@ -26,9 +26,11 @@ function onFormSubmit(evt) {
 
 
 function onFormInput(evt) {
-    
-    formData[evt.target.name] = evt.target.value
+    if (formData) {
+         formData[evt.target.name] = evt.target.value
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
+    }
+   
    
    
 }
