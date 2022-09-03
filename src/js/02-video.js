@@ -7,9 +7,9 @@ const STORAGE_KEY = "videoplayer-current-time"
     player.on('timeupdate', throttle(timeUpdate,1000));
 
 function timeUpdate(data) {
-localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+localStorage.setItem("videoplayer-current-time", JSON.stringify(data))
 }
-    const timePause = JSON.parse(localStorage.getItem(STORAGE_KEY)).seconds;
+    const timePause = JSON.parse(localStorage.getItem("videoplayer-current-time")).seconds;
 
 player.setCurrentTime(timePause).then(function (seconds) {
     
