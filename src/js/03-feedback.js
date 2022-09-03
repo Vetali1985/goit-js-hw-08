@@ -1,7 +1,7 @@
 
 
 const STORAGE_KEY = 'feedback-form-state';
-const formData = { };
+const formel = { };
 const throttle = require('lodash.throttle');
 const refs = {
     form: document.querySelector('.feedback-form'),
@@ -27,8 +27,8 @@ function onFormSubmit(evt) {
 
 function onFormInput(evt) {
     
-    formData[evt.target.name] = evt.target.value
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
+    formel[evt.target.name] = evt.target.value
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formel))
    
    
 }
