@@ -1,45 +1,38 @@
 
 
-const STORAGE_KEY = 'feedback-form-state';
-const formData = { };
-const throttle = require('lodash.throttle');
-const refs = {
-    form: document.querySelector('.feedback-form'),
-    textarea: document.querySelector('.feedback-form textarea'),
-    email: document.querySelector('.feedback-form input'),
-}
-refs.form.addEventListener('submit', onFormSubmit);
-refs.form.addEventListener('input', throttle(onFormInput,500));
+import throttle from 'lodash.throttle';
 
-populateText();
+const FORM_KEY = 'feedback-form-state';
+const form = document.querySelector('.feedback-form');
+const email = document.querySelector('input[name="email"]');
+const message = document.querySelector('textarea[name="message"]');
 
-function onFormSubmit(evt) {
-    evt.preventDefault();
-    const storageObj = localStorage.getItem(STORAGE_KEY);
-    console.log(JSON.parse(storageObj))
-    
-    evt.currentTarget.reset();
-    localStorage.removeItem(STORAGE_KEY)
-   
+form.addEventListener('input', throttle(onInput, 500));
+form.addEventListener('submit', onSubmit);
+
+getInput();
+
+function onInput() {
+  const inputDataObj = { email: email.value, message: message.value }
+  localStorage.setItem(FORM_KEY, JSON.stringify(inputDataObj));
 }
 
-
-
-function onFormInput(evt) {
-    
-    formData[evt.target.name] = evt.target.value
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
-   
-   
+function onSubmit(evt) {
+  evt.preventDefault();
+  if (!email.value || !message.value) return alert('Fill in all fields');
+  console.log(JSON.parse(localStorage.getItem(FORM_KEY)));
+  evt.currentTarget.reset();
+  localStorage.removeItem(FORM_KEY);
 }
-function populateText() {
-    const saveInputForm = localStorage.getItem(STORAGE_KEY)
-    if (saveInputForm) {
-        const { email, message } = JSON.parse(saveInputForm);
 
-        refs.form.email.value = email;
-        refs.form.message.value = message;
-        formData.email = email;
-        formData.message = message;
-    }
+function getInput() {
+  try {
+    const recievedData = localStorage.getItem(FORM_KEY);
+    if (recievedData) {
+      email.value = JSON.parse(recievedData).email
+      message.value = JSON.parse(recievedData).message
+    };
+  } catch (error) {
+    console.log('Get state error: ', error.message);
+  }
 }
